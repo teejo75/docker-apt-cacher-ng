@@ -3,9 +3,8 @@
 
 ## Dockerized apt-cacher-ng
 
-Exactly what it says. The image is based on Debian-slim and should cache most apt repositories, including https.
-
-This image provides access to the full /etc/apt-cacher-ng folder as well as the cache folder, just mount the appropriate volumes.
+This image is based on Debian-slim and should cache most apt repositories, including https. It provides 
+access to the full `/etc/apt-cacher-ng` folder as well as the cache folder. Just mount the appropriate volumes.
 
 
 Use the following simple `docker-compose.yml` to bring the service up.
@@ -28,4 +27,7 @@ To configure your installations to use this cache, create a file called `02proxy
 `Acquire::http::Proxy "http://<ip of docker host>:3142";`
 
 Use apt as normal.
+
+NOTE: If you find you're getting dns lookup failures from the cache when trying to do an `apt update`, connect to the cache host and ping the specific server that is failing, then try running your apt update again.
+It's a strange issue and is not specific to the container. I have seen this happen on my non-dockerized cache and may be particular to the version of apt-cacher-ng.
 
