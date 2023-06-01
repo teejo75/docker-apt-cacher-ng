@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 LABEL org.opencontainers.image.source=https://github.com/teejo75/docker-apt-cacher-ng
 LABEL org.opencontainers.image.description="Dockerized apt-cacher-ng"
