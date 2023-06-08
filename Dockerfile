@@ -1,14 +1,11 @@
-FROM debian:bookworm-slim
+FROM debian:bullseye-slim
 
 LABEL org.opencontainers.image.source=https://github.com/teejo75/docker-apt-cacher-ng
 LABEL org.opencontainers.image.description="Dockerized apt-cacher-ng"
 
-RUN apt-get update && apt-get install -y apt-cacher-ng && apt-get clean all; \
-    rm -rf /var/lib/apt/lists/*; mkdir -p /tmp/acng && cp -a /etc/apt-cacher-ng/* /tmp/acng; \
-    echo "PassThroughPattern: .*" >> /tmp/acng/acng.conf; \
-    echo "UnbufferLogs: 1" >> /tmp/acng/acng.conf; \
-    echo "VerboseLog: 1" >> /tmp/acng/acng.conf; \
-    echo "DnsCacheSeconds: 1800" >> /tmp/acng/acng.conf;
+RUN echo apt-cacher-ng apt-cacher-ng/tunnelenable boolean true | debconf-set-selections && \
+    apt-get update && apt-get install -y apt-cacher-ng && apt-get clean all; \
+    rm -rf /var/lib/apt/lists/*; mkdir -p /tmp/acng && cp -a /etc/apt-cacher-ng/* /tmp/acng
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
