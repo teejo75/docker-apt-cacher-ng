@@ -9,3 +9,5 @@ services:
     volumes:
     - ./data:/var/cache/apt-cacher-ng
     - ./etc-apt-cacher-ng:/etc/apt-cacher-ng
+    - ./logs:/var/log/apt-cacher-ng
+

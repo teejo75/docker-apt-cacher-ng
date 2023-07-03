@@ -12,6 +12,6 @@ RUN chmod +x /start.sh
 
 EXPOSE 3142
 
-VOLUME [ "/etc/apt-cacher-ng", "/var/cache/apt-cacher-ng" ]
+VOLUME [ "/etc/apt-cacher-ng", "/var/cache/apt-cacher-ng", "/var/log/apt-cacher-ng" ]
 
 ENTRYPOINT [ "/start.sh" ]
